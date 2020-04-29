@@ -1105,25 +1105,25 @@ $(`#requester-review-modal`).on(`show.bs.modal`, async (event) => {
   if (options.turkerview) {
     if (tv && tv.ratings) {
       document.getElementById(`review-who`).textContent = tv.requester_name;
-      document.getElementById(`review-turkerview-link`).href = `https://turkerview.com/requesters/${rid}`;
+      document.getElementById(`review-turkerview-link`).href = DOMPurify.sanitize(`https://turkerview.com/requesters/${rid}`);
       document.getElementById(
         `review-turkerview-link`,
-      ).innerHTML = `TurkerView (${tv.reviews.toLocaleString()} Reviews)`;
-      document.getElementById(`review-turkerview-ratings-hourly`).innerHTML = `<strong class="pull-right text-${
+      ).innerHTML = DOMPurify.sanitize(`TurkerView (${tv.reviews.toLocaleString()} Reviews)`);
+      document.getElementById(`review-turkerview-ratings-hourly`).innerHTML = DOMPurify.sanitize(`<strong class="pull-right text-${
         tv.wages.average.class
-      }">${toMoneyString(tv.wages.average.wage)}/hr</strong>`;
+      }">${toMoneyString(tv.wages.average.wage)}/hr</strong>`);
       document.getElementById(`review-turkerview-ratings-pay`).innerHTML =
-        `<span class="pull-right text-${tv.ratings.pay.class}">${tv.ratings.pay.text} <i class="fa ${
+        DOMPurify.sanitize(`<span class="pull-right text-${tv.ratings.pay.class}">${tv.ratings.pay.text} <i class="fa ${
           tv.ratings.pay.faicon
-        }"></i></span>` || `-`;
+        }"></i></span>`) || `-`;
       document.getElementById(`review-turkerview-ratings-fast`).innerHTML =
-        `<span class="pull-right text-${tv.ratings.fast.class}">${tv.ratings.fast.text}</span>` || `-`;
+        DOMPurify.sanitize(`<span class="pull-right text-${tv.ratings.fast.class}">${tv.ratings.fast.text}</span>`) || `-`;
       document.getElementById(`review-turkerview-ratings-comm`).innerHTML =
-        `<span class="pull-right text-${tv.ratings.comm.class}">${tv.ratings.comm.text}</span>` || `-`;
+        DOMPurify.sanitize(`<span class="pull-right text-${tv.ratings.comm.class}">${tv.ratings.comm.text}</span>`) || `-`;
       document.getElementById(`review-turkerview-rejections`).innerHTML =
         tv.rejections === 0
           ? `<i class="fa fa-check text-success"></i> No Rejections`
-          : `<i class="fa fa-times text-danger"></i> <a href="https://turkerview.com/requesters/${rid}/reviews/rejected/" target="_blank">Rejected Work</a>`;
+          : DOMPurify.sanitize(`<i class="fa fa-times text-danger"></i> <a href="https://turkerview.com/requesters/${rid}/reviews/rejected/" target="_blank">Rejected Work</a>`);
       document.getElementById(`review-turkerview-reviews`).textContent = tv.reviews.toLocaleString();
       document.getElementById(`review-turkerview-blocks`).innerHTML =
         tv.blocks === 0
@@ -1132,19 +1132,19 @@ $(`#requester-review-modal`).on(`show.bs.modal`, async (event) => {
 
       document.getElementById(
         `review-turkerview-profile-link`,
-      ).innerHTML = `<a href="https://turkerview.com/requesters/${rid}" target="_blank">Profile <i class="fa fa-external-link"></i></a>`;
+      ).innerHTML = DOMPurify.sanitize(`<a href="https://turkerview.com/requesters/${rid}" target="_blank">Profile <i class="fa fa-external-link"></i></a>`);
       document.getElementById(
         `review-turkerview-reviews-link`,
-      ).innerHTML = `<a href="https://turkerview.com/requesters/${rid}/reviews" target="_blank">Reviews <i class="fa fa-external-link"></i></a>`;
+      ).innerHTML = DOMPurify.sanitize(`<a href="https://turkerview.com/requesters/${rid}/reviews" target="_blank">Reviews <i class="fa fa-external-link"></i></a>`);
 
       document.getElementById(`review-turkerview-review`).style.display = ``;
       document.getElementById(`review-turkerview-no-reviews`).style.display = `none`;
 
       document.getElementById(
         `review-turkerview-user-title`,
-      ).innerHTML = `Your Reviews (${tv.user_reviews.toLocaleString()} Reviews)`;
+      ).innerHTML = DOMPurify.sanitize(`Your Reviews (${tv.user_reviews.toLocaleString()} Reviews)`);
 
-      document.getElementById(`tv-user-div`).innerHTML = `
+      document.getElementById(`tv-user-div`).innerHTML = DOMPurify.sanitize(`
       <div class="row" style="display: ${tv.user_reviews === 0 ? `none` : ``};">
           <div class="col"><p style="margin-bottom: 0.15rem;" class="text-muted"><strong>Hourly Avg:</strong></p></div>
           <div class="col"><p style="margin-bottom: 0.15rem;" class="text-muted pull-right"><strong class="${requesterHourlyTVClass(
@@ -1157,9 +1157,9 @@ $(`#requester-review-modal`).on(`show.bs.modal`, async (event) => {
         <div style="text-align: center; font-size: 0.714rem;">
           <a class="text-success" href="https://turkerview.com/review.php" target="_blank">How Do I Review on TV?</a>
         </div>
-      </span>`;
+      </span>`);
     } else {
-      document.getElementById(`review-turkerview-link`).href = `https://turkerview.com/requesters/${rid}`;
+      document.getElementById(`review-turkerview-link`).href = DOMPurify.sanitize(`https://turkerview.com/requesters/${rid}`);
       document.getElementById(`review-turkerview-link`).innerHTML = `TurkerView`;
       document.getElementById(`review-turkerview-review`).style.display = `none`;
       document.getElementById(`review-turkerview-no-reviews`).style.display = ``;
@@ -1173,7 +1173,7 @@ $(`#requester-review-modal`).on(`show.bs.modal`, async (event) => {
 
   if (options.turkopticon) {
     if (to) {
-      document.getElementById(`review-turkopticon-link`).href = `https://turkopticon.ucsd.edu/${rid}`;
+      document.getElementById(`review-turkopticon-link`).href = DOMPurify.sanitize(`https://turkopticon.ucsd.edu/${rid}`);
       document.getElementById(`review-turkopticon-attrs-pay`).textContent = `${to.attrs.pay} / 5` || `- / 5`;
       document.getElementById(`review-turkopticon-attrs-fast`).textContent = `${to.attrs.fast} / 5` || `- / 5`;
       document.getElementById(`review-turkopticon-attrs-comm`).textContent = `${to.attrs.comm} / 5` || `- / 5`;
@@ -1196,7 +1196,7 @@ $(`#requester-review-modal`).on(`show.bs.modal`, async (event) => {
     if (to2) {
       const { all, recent } = to2;
 
-      document.getElementById(`review-turkopticon2-link`).href = `https://turkopticon.info/requesters/${rid}`;
+      document.getElementById(`review-turkopticon2-link`).href = DOMPurify.sanitize(`https://turkopticon.info/requesters/${rid}`);
       document.getElementById(`review-turkopticon2-recent-reward`).textContent = recent.hourly;
       document.getElementById(`review-turkopticon2-recent-pending`).textContent = recent.pending;
       document.getElementById(`review-turkopticon2-recent-comm`).textContent = recent.comm;

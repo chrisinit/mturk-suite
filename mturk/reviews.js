@@ -243,7 +243,7 @@ async function handleTurkerview(rids) {
         title: \`${hit.requester_name} [${hit.requester_id}]\`,
         content: \`
           <div class="container">
-            ${turkerviewHTML(hit, review)}
+            ${DOMPurify.sanitize(turkerviewHTML(hit, review))}
           </div>\`
       });`;
       span.appendChild(script);
@@ -273,8 +273,8 @@ async function handleTurkopticon(rids) {
         title: \`${hit.requester_name} [${hit.requester_id}]\`,
         content: \`
           <div class="container">
-            ${turkopticonHTML(hit, review)}
-            ${turkopticon2HTML(hit, review)}
+            ${DOMPurify.sanitize(turkopticonHTML(hit, review))}
+            ${DOMPurify.sanitize(turkopticon2HTML(hit, review))}
           </div>\`
       });`;
       icon.appendChild(script);

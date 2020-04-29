@@ -111,7 +111,7 @@ function returnHitDetailDataModal(json){
 function buildAndAppend(json, assignableHitsCount){
     if (json.avg_hourly === null) return;
 
-    document.querySelector(`body`).insertAdjacentHTML(`beforeend`, returnHitDetailDataModal(json));
+    document.querySelector(`body`).insertAdjacentHTML(`beforeend`, DOMPurify.sanitize(returnHitDetailDataModal(json)));
 
     let file = taskHourlyTVClass(json.avg_hourly);
 

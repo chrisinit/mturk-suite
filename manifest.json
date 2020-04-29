@@ -134,6 +134,7 @@
     {
       "js": [
         "js/moment.js",
+        "js/purify.js",
         "js/moment-duration-format.js",
         "js/moment-timezone.js",
         "mturk/turkerview/return-reviews.js",
@@ -287,7 +288,10 @@
     },
 
     {
-      "js": ["mturk/reviews.js"],
+      "js": [
+        "js/purify.js",
+        "mturk/reviews.js"
+      ],
       "matches": [
         "https://worker.mturk.com/",
         "https://worker.mturk.com/?*",

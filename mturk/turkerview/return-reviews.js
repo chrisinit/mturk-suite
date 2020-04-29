@@ -130,11 +130,11 @@ function buildReturnWarnings(json){
     let x = Number(json['broken_total']) + Number(json['underpaid_total']) + Number(json['unpaid_screener_total']) + Number(json['tos_total']) + Number(json['writing_total']) + Number(json['downloads_total']);
 
     document.querySelectorAll(`.work-pipeline-action`).forEach(el => {
-        el.insertAdjacentHTML(`afterbegin`, `<a ${highest_warning_class == 'hidden' ? 'style="display: none;"' : ''} class="btn btn-danger mts-tv-return-warning-data-launcher" href="#" style="margin-right: 5px;"><i class="fa fa-fw fa-warning"></i> ${x}</a>`);
+        el.insertAdjacentHTML(`afterbegin`, DOMPurify.sanitize(`<a ${highest_warning_class == 'hidden' ? 'style="display: none;"' : ''} class="btn btn-danger mts-tv-return-warning-data-launcher" href="#" style="margin-right: 5px;"><i class="fa fa-fw fa-warning"></i> ${x}</a>`));
     })
 
     document.querySelectorAll(`.task-project-title`).forEach(el => {
-        el.insertAdjacentHTML(`afterbegin`, `<div ${highest_warning_class == 'hidden' ? 'style="display: none;"' : 'style="display: inline-block;"'}><i class="fa fa-warning ${highest_warning_class} mts-tv-return-warning-data-launcher" style="cursor: pointer; padding-right: 3px;"> (${x})</i></div>`);
+        el.insertAdjacentHTML(`afterbegin`, DOMPurify.sanitize(`<div ${highest_warning_class == 'hidden' ? 'style="display: none;"' : 'style="display: inline-block;"'}><i class="fa fa-warning ${highest_warning_class} mts-tv-return-warning-data-launcher" style="cursor: pointer; padding-right: 3px;"> (${x})</i></div>`));
     })
 
     let btnHtml = `<i class="fa fa-warning fa-fw ${highest_warning_class} mts-tv-return-warning-data-launcher" style="line-height: 1rem; cursor: pointer; ${highest_warning_class == 'hidden' ? 'display: none;' : ''}" data-toggle="tooltip" data-title="Oh shit!"></i>`;
@@ -259,7 +259,7 @@ function buildReturnWarnings(json){
 </div>
 <div id="mts-tv-return-warning-data-modal-backdrop" class="modal-backdrop fade in" style="display: none; z-index: 10999;"></div>`;
 
-    document.querySelector(`footer`).insertAdjacentHTML(`beforebegin`, tvReturnWarningDataModal);
+    document.querySelector(`footer`).insertAdjacentHTML(`beforebegin`, DOMPurify.sanitize(tvReturnWarningDataModal));
 
     //modal listeners
     document.getElementById(`mts-tv-return-warning-data-modal-backdrop`).addEventListener(`click`, function(){
